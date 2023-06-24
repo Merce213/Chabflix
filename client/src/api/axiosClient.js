@@ -5,6 +5,7 @@ import { apiConfig } from "./apiConfig";
 export const axiosClient = axios.create({
     baseURL: apiConfig.baseUrl,
     headers: {
+        Accept: "application/json",
         "Content-Type": "application/json",
     },
     paramsSerializer: (params) =>
