@@ -6,7 +6,7 @@ export const UserProvider = ({ children }) => {
     const [user, setUser] = useState(null);
 
     const isSessionId = document.cookie.includes("success");
-    console.log(isSessionId);
+    // console.log(isSessionId);
 
     const fetchUserInfos = async () => {
         const response = await fetch("http://localhost:8000/api/auth/me", {

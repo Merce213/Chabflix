@@ -16,7 +16,7 @@ export const requestToken = async (req, res) => {
     });
     const data = await response.json();
 
-    console.log("request", data);
+    // console.log("request", data);
 
     const reqToken = data.request_token;
 
@@ -40,7 +40,7 @@ export const tmdbCallback = async (req, res) => {
         });
         const data = await response.json();
 
-        console.log("session", data);
+        // console.log("session", data);
 
         const success = data.success;
         const sessionId = data.session_id;
@@ -74,7 +74,7 @@ export const userInfos = async (req, res) => {
     });
     const data = await response.json();
 
-    console.log("user", data);
+    // console.log("user", data);
 
     res.status(200).json(data);
 };
@@ -98,7 +98,7 @@ export const logout = async (req, res) => {
     });
     const data = await response.json();
 
-    console.log("logout", data);
+    // console.log("logout", data);
 
     res.clearCookie("success");
     res.clearCookie("session_id");

@@ -11,6 +11,6 @@ const router = express.Router();
 router.get("/request-token", requestToken);
 router.get("/tmdb/callback", tmdbCallback);
 router.get("/me", userInfos);
-router.get("/logout", logout);
+router.delete("/logout", logout);
 
 export default router;

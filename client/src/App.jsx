@@ -17,12 +17,11 @@ const App = () => {
         const data = await response.json();
 
         window.location.href = data.redirectUrl;
-        console.log("data", data);
     };
 
     const logout = async () => {
         const response = await fetch("http://localhost:8000/api/auth/logout", {
-            method: "GET",
+            method: "DELETE",
             headers: {
                 Accept: "application/json",
                 "Content-Type": "application/json",
@@ -30,7 +29,7 @@ const App = () => {
             credentials: "include",
         });
         const data = await response.json();
-        console.log("data", data);
+        // console.log("data", data);
         window.location.reload(true);
     };
 
