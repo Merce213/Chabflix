@@ -45,10 +45,10 @@ export const tmdbCallback = async (req, res) => {
         const success = data.success;
         const sessionId = data.session_id;
 
-        res.cookie("success", success);
         res.cookie("session_id", sessionId, {
             httpOnly: true,
         });
+        res.cookie("success", success);
 
         res.redirect(REDIRECT_URI_CLIENT);
     } else {
