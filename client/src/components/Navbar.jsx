@@ -14,6 +14,10 @@ const Navbar = () => {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const [dropdownMenuOpen, setDropdownMenuOpen] = useState(false);
 
+    const [isScrolled, setIsScrolled] = useState(false);
+    const [isVisible, setIsVisible] = useState(true);
+    const [prevScrollPos, setPrevScrollPos] = useState(0);
+
     const userDropdownRef = useRef(null);
 
     const { user } = useUserValue();
@@ -59,22 +63,51 @@ const Navbar = () => {
         }
     };
 
+    window.onscroll = () => {
+        setIsScrolled(window.scrollY === 0 ? false : true);
+        return () => (window.onscroll = null);
+    };
+
+    const handleScroll = () => {
+        const currentScrollPos = window.scrollY;
+        const visible = prevScrollPos > currentScrollPos;
+
+        // console.log("currentScrollPos", currentScrollPos);
+        // console.log("visible", visible);
+
+        setPrevScrollPos(currentScrollPos);
+        setIsVisible(visible);
+    };
+
+    // console.log("IsVisible", isVisible);
+    // console.log("prevScrollPos", prevScrollPos);
+
+    useEffect(() => {
+        window.addEventListener("scroll", handleScroll);
+
+        return () => window.removeEventListener("scroll", handleScroll);
+    }, [prevScrollPos, isVisible, handleScroll]);
+
     useEffect(() => {
         if (dropdownMenuOpen) {
-            document.addEventListener("mousedown", handleOutsideClick);
+            window.addEventListener("mousedown", handleOutsideClick);
         } else {
-            document.removeEventListener("mousedown", handleOutsideClick);
+            window.removeEventListener("mousedown", handleOutsideClick);
         }
 
         return () => {
-            document.removeEventListener("mousedown", handleOutsideClick);
+            window.removeEventListener("mousedown", handleOutsideClick);
         };
     }, [dropdownMenuOpen]);
 
     return (
-        <header className="relative p-4 w-full lg:container mx-auto">
-            <nav className="flex justify-between items-center gap-4">
-                <NavLink to={"/"}>
+        <header
+            className={`fixed z-30 p-4 w-full mx-auto transition-all duration-300 ${
+                isVisible ? "top-0" : "-top-full"
+            } ${isScrolled ? "bg-slate-900" : "bg-transparent"}`}
+        >
+            <nav className="flex justify-end md:justify-between items-center lg:container mx-auto gap-2 md:gap-4">
+                <NavLink to={"/"} className="me-auto">
                     <img
                         src={logo}
                         alt="Chabflix home"
@@ -88,7 +121,7 @@ const Navbar = () => {
                 </div>
 
                 <div
-                    className={`absolute top-0 left-0 w-full h-full py-6 px-4 ${
+                    className={`absolute top-0 left-0 w-full h-full py-6 px-4 bg-slate-900 ${
                         searchBoxOpen ? "flex" : "hidden"
                     } items-center gap-2 z-10`}
                 >
@@ -132,7 +165,7 @@ const Navbar = () => {
                                 src={avatar}
                                 alt="avatar"
                                 className="rounded-full
-                                    w-10 h-10 object-cover"
+                                    w-10 h-10 object-cover mx-2"
                             />
                         ) : (
                             <FaUserCircle size={"1.8rem"} color="white" />
@@ -141,7 +174,7 @@ const Navbar = () => {
                         <ul
                             className={`${
                                 dropdownMenuOpen ? "block" : "hidden"
-                            } absolute top-14 left-5 -translate-x-[50%] w-32 text-center border bg-gray-600 shadow-md shadow-blue-400 text-white rounded-md z-30`}
+                            } absolute top-14 left-7 -translate-x-[50%] w-32 text-center border bg-gray-600 shadow-md shadow-blue-400 text-white rounded-md z-30`}
                         >
                             <li className="p-2 border-b">
                                 <span>{user.username}</span>
@@ -167,22 +200,25 @@ const Navbar = () => {
                 ) : (
                     <button
                         onClick={login}
-                        className="flex items-center space-x-2"
+                        className="flex items-center md:space-x-2 md:w-28"
                     >
                         <FaUserCircle
                             size={"1.8rem"}
                             color="white"
-                            title="Connexion"
+                            title="Sign in"
                         />
                         <span className="text-white md:block hidden">
-                            Connexion
+                            Sign in
                         </span>
                     </button>
                 )}
 
                 <button
                     className="p-3 bg-gray-600 rounded-lg"
-                    onClick={() => setSearchBoxOpen(!searchBoxOpen)}
+                    onClick={() =>
+                        setSearchBoxOpen(!searchBoxOpen) &
+                        setMobileMenuOpen(false)
+                    }
                 >
                     <AiOutlineSearch
                         size={"24px"}

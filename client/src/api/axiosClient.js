@@ -2,7 +2,7 @@ import axios from "axios";
 import queryString from "query-string";
 import { apiConfig } from "./apiConfig";
 
-export const axiosClient = axios.create({
+const axiosClient = axios.create({
     baseURL: apiConfig.baseUrl,
     headers: {
         Accept: "application/json",
@@ -24,3 +24,5 @@ axiosClient.interceptors.response.use(
         throw error;
     }
 );
+
+export default axiosClient;
