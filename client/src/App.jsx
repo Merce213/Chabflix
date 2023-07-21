@@ -1,6 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
+import Footer from "./components/Footer";
 
 const App = () => {
     return (
@@ -12,10 +13,10 @@ const App = () => {
                     <Route path="/" element={<Home />} />
                 </Routes>
             </main>
+
+            <Footer />
         </>
     );
 };
-
-/* Changer l'api movies et faire comme dans bétaseries pour pas que ça change le random number a chq fois */
 
 export default App;

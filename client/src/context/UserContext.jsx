@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { createContext, useState, useContext, useEffect, useMemo } from "react";
+import { createContext, useState, useContext, useMemo } from "react";
 import Loading from "../components/Loading";
 
 export const userContext = createContext();

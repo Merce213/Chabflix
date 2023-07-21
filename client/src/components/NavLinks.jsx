@@ -5,8 +5,8 @@ import { NavLink } from "react-router-dom";
 
 export const links = [
     { name: "Home", to: "/", icon: HiOutlineHome },
-    { name: "TV Shows", to: "/shows", icon: BsLaptop },
-    { name: "Movies", to: "/movies", icon: BsFilm },
+    { name: "TV Shows", to: "/tv", icon: BsLaptop },
+    { name: "Movies", to: "/movie", icon: BsFilm },
 ];
 
 const NavLinks = ({ handleClick }) =>
