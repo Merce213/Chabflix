@@ -30,4 +30,16 @@ export const tmdbApi = {
         const url = category[cate] + "/" + id + "/videos";
         return axiosClient.get(url, { params: {} });
     },
+    search: (cate, params) => {
+        const url = "search/" + category[cate];
+        return axiosClient.get(url, { params });
+    },
+    searchByQuery: (params) => {
+        const url = "search/multi";
+        return axiosClient.get(url, { params });
+    },
+    getTrending: () => {
+        const url = "trending/all/day";
+        return axiosClient.get(url, { params: {} });
+    },
 };
