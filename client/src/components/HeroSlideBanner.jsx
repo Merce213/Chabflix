@@ -66,7 +66,7 @@ const HeroSlideItem = forwardRef(({ movie }, ref) => {
     );
 
     return (
-        <div className="h-screen transition-all duration-500 relative mb-12">
+        <section className="h-screen transition-all duration-500 relative mb-12">
             <img
                 className="w-full h-full object-cover brightness-50 object-center"
                 src={background}
@@ -111,7 +111,7 @@ const HeroSlideItem = forwardRef(({ movie }, ref) => {
                 setShowModal={setShowModal}
                 id={movie.id}
             />
-        </div>
+        </section>
     );
 });
 

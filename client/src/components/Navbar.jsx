@@ -8,6 +8,7 @@ import { FaUserCircle } from "react-icons/fa";
 import { useUserValue } from "../context/UserContext";
 import { apiConfig } from "../api/apiConfig";
 import NavLinks from "./NavLinks";
+import SearchModalResults from "./SearchModalResults";
 
 const Navbar = () => {
     const [searchBoxOpen, setSearchBoxOpen] = useState(false);
@@ -17,6 +18,12 @@ const Navbar = () => {
     const [isScrolled, setIsScrolled] = useState(false);
     const [isVisible, setIsVisible] = useState(true);
     const [prevScrollPos, setPrevScrollPos] = useState(0);
+
+    const [search, setSearch] = useState("");
+
+    const handleChangeInput = (event) => {
+        setSearch(event.target.value);
+    };
 
     const userDropdownRef = useRef(null);
 
@@ -107,7 +114,7 @@ const Navbar = () => {
             } ${isScrolled ? "bg-slate-900" : "bg-transparent"}`}
         >
             <nav className="flex justify-end md:justify-between items-center lg:container mx-auto gap-2 md:gap-4">
-                <NavLink to={"/"} className="me-auto">
+                <NavLink to={"/"} className="me-auto hidden md:flex">
                     <img
                         src={logo}
                         alt="Chabflix home"
@@ -133,6 +140,8 @@ const Navbar = () => {
                             placeholder="Search..."
                             autoComplete="off"
                             className="bg-gray-600 h-12 leading-[48px] ps-11 pe-4 outline-none rounded-lg ease duration-500 hover:shadow-red-600 focus:border focus:shadow-gray-300 focus:ps-4 peer w-full"
+                            onChange={handleChangeInput}
+                            value={search}
                         />
 
                         <AiOutlineSearch
@@ -259,6 +268,12 @@ const Navbar = () => {
                     <NavLinks handleClick={() => setMobileMenuOpen(false)} />
                 </div>
             </nav>
+            {searchBoxOpen && (
+                <SearchModalResults
+                    setSearchBoxOpen={setSearchBoxOpen}
+                    search={search}
+                />
+            )}
         </header>
     );
 };
