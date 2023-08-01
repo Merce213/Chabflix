@@ -1,21 +1,35 @@
-import { category, movieType, tvType, tmdbApi } from "../tmdbApi";
+import { category, movieType, tmdbApi } from "../tmdbApi";
 
 export const fetchHeroBanner = async () => {
-    let randomNumberPage = Math.floor(Math.random() * 501);
-    while (randomNumberPage === Math.random() * 501) {
-        randomNumberPage = Math.floor(Math.random() * 501);
-    }
-
-    let randomNumberMovie = Math.floor(Math.random() * 20);
-    while (randomNumberMovie === Math.random() * 20) {
-        randomNumberMovie = Math.floor(Math.random() * 20);
+    let randomNumberPage = Math.floor(Math.random() * 100);
+    while (randomNumberPage === Math.random() * 100) {
+        randomNumberPage = Math.floor(Math.random() * 100);
     }
 
     const params = { page: randomNumberPage };
 
-    const response = await tmdbApi.getMovieList(movieType.popular, params);
+    function randomSample(arr, sampleSize) {
+        const shuffledArray = arr.slice().sort(() => 0.5 - Math.random());
+        const sampledArray = [];
 
-    return response.results.slice(0, 4);
+        while (sampledArray.length < sampleSize) {
+            const randomIndex = Math.floor(
+                Math.random() * shuffledArray.length
+            );
+            const randomElement = shuffledArray[randomIndex];
+
+            if (!sampledArray.includes(randomElement)) {
+                sampledArray.push(randomElement);
+            }
+        }
+
+        return sampledArray;
+    }
+
+    const response = await tmdbApi.getMovieList(movieType.popular, params);
+    const randomResults = randomSample(response.results, 4);
+
+    return randomResults;
 };
 
 export const fetchVideoTrailer = async (id) => {
