@@ -33,7 +33,13 @@ const ItemCard = ({ item, category }) => {
                     <BsFillPlayCircleFill size={"4rem"} />
                 </button>
             </div>
-            <h3 className="ps-1">{item.title || item.name}</h3>
+            <h3 className="ps-1">
+                {item.title || item.name}
+                <span className="text-sm text-yellow-400">
+                    {" "}
+                    {item.vote_average}/10
+                </span>
+            </h3>
         </Link>
     );
 };

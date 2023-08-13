@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import logo from "../assets/images/logo.png";
 import { AiOutlineSearch } from "react-icons/ai";
 import { RiCloseLine } from "react-icons/ri";
@@ -21,8 +21,23 @@ const Navbar = () => {
 
     const [search, setSearch] = useState("");
 
+    const navigate = useNavigate();
+
     const handleChangeInput = (event) => {
         setSearch(event.target.value);
+    };
+
+    const searchSubmit = (e) => {
+        e.preventDefault();
+
+        if (search) {
+            setSearchBoxOpen(false);
+
+            navigate({
+                pathname: "/search",
+                search: `?query=${search}`,
+            });
+        }
     };
 
     const userDropdownRef = useRef(null);
@@ -71,7 +86,7 @@ const Navbar = () => {
     };
 
     window.onscroll = () => {
-        setIsScrolled(window.scrollY === 0 ? false : true);
+        setIsScrolled(window.scrollY !== 0);
         return () => (window.onscroll = null);
     };
 
@@ -133,22 +148,31 @@ const Navbar = () => {
                     } items-center gap-2 z-10`}
                 >
                     <div className="relative grow">
-                        <input
-                            type="text"
-                            name="search"
-                            aria-label="search movies or shows..."
-                            placeholder="Search..."
-                            autoComplete="off"
-                            className="bg-gray-600 h-12 leading-[48px] ps-11 pe-4 outline-none rounded-lg ease duration-500 hover:shadow-red-600 focus:border focus:shadow-gray-300 focus:ps-4 peer w-full"
-                            onChange={handleChangeInput}
-                            value={search}
-                        />
+                        <form onSubmit={searchSubmit}>
+                            <input
+                                type="text"
+                                name="search"
+                                aria-label="search movies or shows..."
+                                placeholder="Search..."
+                                autoComplete="off"
+                                className="bg-gray-600 h-12 leading-[48px] ps-11 pe-4 outline-none rounded-lg ease duration-500 hover:shadow-red-600 focus:border focus:shadow-gray-300 focus:ps-4 peer w-full"
+                                onChange={handleChangeInput}
+                                value={search}
+                            />
 
-                        <AiOutlineSearch
-                            size={"24px"}
-                            alt="search"
-                            className="absolute top-1/2 -translate-y-1/2 left-3 opacity-50 ease duration-500 peer-focus:opacity-0"
-                        />
+                            <AiOutlineSearch
+                                size={"24px"}
+                                alt="search"
+                                className="absolute top-1/2 -translate-y-1/2 left-3 opacity-50 ease duration-500 peer-focus:opacity-0"
+                            />
+
+                            <RiCloseLine
+                                size={"20px"}
+                                alt="clear input"
+                                className="absolute top-1/2 -translate-y-1/2 right-3 opacity-50 ease duration-500 hover:opacity-100"
+                                onClick={() => setSearch("")}
+                            />
+                        </form>
                     </div>
 
                     <button

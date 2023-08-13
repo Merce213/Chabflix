@@ -12,7 +12,7 @@ const App = () => {
             <main className="w-full min-h-screen">
                 <Routes>
                     <Route path="/" element={<Home />} />
-                    <Route path="/search/:category" element={<Search />} />
+                    <Route path="/search/:category?" element={<Search />} />
                 </Routes>
             </main>
 
@@ -20,6 +20,6 @@ const App = () => {
         </>
     );
 };
-/* Finir la recherche autocomplet avec l'input + Finir la recherche page résultat */
+/* Finir la recherche page résultat */
 
 export default App;
