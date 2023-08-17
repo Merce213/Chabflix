@@ -34,7 +34,7 @@ const SearchModalResults = ({ setSearchBoxOpen, search }) => {
     });
 
     const resultQuery = useQuery({
-        queryKey: ["Search", search],
+        queryKey: ["SearchLink", search],
         queryFn: () => getResultMultiQuery(search),
         staleTime: Infinity,
     });
@@ -47,28 +47,28 @@ const SearchModalResults = ({ setSearchBoxOpen, search }) => {
         return <Loading />;
     }
 
-    console.log(resultQuery.data);
-
     return (
         <div
             className={`fixed left-0 w-full bg-slate-900 transition-all duration-300 ${
                 isVisible ? "top-20" : "-top-full"
             }`}
         >
-            <div className="border-y flex space-x-2 py-1 ps-4">
-                <button>
-                    <HiTrendingUp size={"28px"} />
-                </button>
-                <h2 className="text-lg font-extrabold tracking-wide">
-                    Trending
-                </h2>
-            </div>
+            {search.length >= 1 ? null : (
+                <div className="border-y flex space-x-2 py-1 ps-4">
+                    <button>
+                        <HiTrendingUp size={"28px"} />
+                    </button>
+                    <h2 className="text-lg font-extrabold tracking-wide">
+                        Trending
+                    </h2>
+                </div>
+            )}
             <div className="flex flex-col">
                 {search.length >= 1
                     ? resultQuery.data.map((item) => (
                           <Link
                               key={item.id}
-                              className="flex border-b py-1 ps-4 space-x-2 cursor-pointer"
+                              className="flex border-b py-1 ps-4 space-x-2 cursor-pointer hover:bg-gray-600"
                               to={{
                                   pathname: `/search/${item.media_type}`,
                                   search: `?query=${item.title || item.name}`,
@@ -89,7 +89,7 @@ const SearchModalResults = ({ setSearchBoxOpen, search }) => {
                     : trendingSearchResult.data.map((item) => (
                           <Link
                               key={item.id}
-                              className="flex border-b py-1 ps-4 space-x-2 cursor-pointer"
+                              className="flex border-b py-1 ps-4 space-x-2 cursor-pointer hover:bg-gray-600"
                               to={{
                                   pathname: `/search/${item.media_type}`,
                                   search: `?query=${item.title || item.name}`,

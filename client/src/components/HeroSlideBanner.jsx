@@ -57,6 +57,7 @@ const HeroSlideItem = forwardRef(({ movie }, ref) => {
     }, [showModal]);
 
     const openModal = () => {
+        window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
         setShowModal(true);
         document.body.style.overflow = "hidden";
     };
@@ -66,7 +67,7 @@ const HeroSlideItem = forwardRef(({ movie }, ref) => {
     );
 
     return (
-        <section className="h-screen transition-all duration-500 relative mb-12">
+        <section className="h-[100dvh] transition-all duration-500 relative mb-12">
             <img
                 className="w-full h-full object-cover brightness-50 object-center"
                 src={background}
@@ -75,7 +76,10 @@ const HeroSlideItem = forwardRef(({ movie }, ref) => {
             <div className="absolute left-1/2 bottom-1/2 -translate-x-1/2 translate-y-1/2 flex justify-center items-center w-full">
                 <div className="w-full md:w-[55%] px-4 md:px-12 py-0 [&>*]:mt-12">
                     <h2 className="text-3xl sm:text-5xl md:text-6xl 2xl:text-7xl font-bold">
-                        {movie.title}
+                        {movie.title}{" "}
+                        <span className="text-sm sm:text-base md:text-2xl 2xl:text-3xl text-yellow-400">
+                            {movie.vote_average}/10
+                        </span>
                     </h2>
                     <div className="font-bold">{movie.overview}</div>
                     <div className="space-x-4 flex flex-nowrap">
