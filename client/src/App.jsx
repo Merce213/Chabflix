@@ -20,6 +20,5 @@ const App = () => {
         </>
     );
 };
-/* Finir la recherche page résultat */
 
 export default App;

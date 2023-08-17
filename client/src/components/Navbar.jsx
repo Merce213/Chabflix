@@ -34,7 +34,7 @@ const Navbar = () => {
             setSearchBoxOpen(false);
 
             navigate({
-                pathname: "/search",
+                pathname: "/search/movie",
                 search: `?query=${search}`,
             });
         }

@@ -67,7 +67,7 @@ const HeroSlideItem = forwardRef(({ movie }, ref) => {
     );
 
     return (
-        <section className="h-screen transition-all duration-500 relative mb-12">
+        <section className="h-[100dvh] transition-all duration-500 relative mb-12">
             <img
                 className="w-full h-full object-cover brightness-50 object-center"
                 src={background}

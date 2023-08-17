@@ -46,7 +46,7 @@ const SearchModalResults = ({ setSearchBoxOpen, search }) => {
     if (trendingSearchResult.isLoading || resultQuery.isLoading) {
         return <Loading />;
     }
-    console.log("resultQuery", resultQuery.data);
+
     return (
         <div
             className={`fixed left-0 w-full bg-slate-900 transition-all duration-300 ${

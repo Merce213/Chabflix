@@ -1,4 +1,4 @@
-import { category, movieType, tmdbApi } from "../tmdbApi";
+import { tmdbApi } from "../tmdbApi";
 
 export const getTrendingSearch = async () => {
     const response = await tmdbApi.getTrending();
@@ -14,10 +14,10 @@ export const getResultMultiQuery = async (query) => {
     return response.results.slice(0, 10);
 };
 
-export const getResults = async (query) => {
-    const params = { query: query };
+export const getResultsQueryAndCategory = async (category, query, page = 1) => {
+    const params = { query: query, page: page };
 
-    const response = await tmdbApi.searchByQuery(params);
+    const response = await tmdbApi.searchByQueryAndCategory(category, params);
 
     return response;
 };
