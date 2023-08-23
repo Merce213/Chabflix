@@ -1,11 +1,8 @@
 import React from "react";
 import { useQuery } from "@tanstack/react-query";
-import { register } from "swiper/element/bundle";
 import Loading from "./Loading";
 import { getList } from "../api/apiCall/movies";
 import ItemCard from "./ItemCard";
-
-register();
 
 const ItemList = ({ category, type }) => {
     const { isLoading, isError, error, data } = useQuery({

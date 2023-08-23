@@ -48,6 +48,7 @@ const Search = () => {
         queryKey: ["Search", category, query, page],
         queryFn: () => getResultsQueryAndCategory(category, query, page),
         staleTime: Infinity,
+        keepPreviousData: true,
     });
 
     if (
@@ -109,23 +110,23 @@ const Search = () => {
         window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
         switch (category) {
             case "movie":
-                return `/movie/${result.title
-                    .toLowerCase()
+                return `/movie/${result?.title
+                    ?.toLowerCase()
                     .replace(/[^\w\s-]/g, "")
                     .replace(/\s/g, "-")}`;
             case "tv":
-                return `/tv/${result.name
-                    .toLowerCase()
+                return `/tv/${result?.name
+                    ?.toLowerCase()
                     .replace(/[^\w\s-]/g, "")
                     .replace(/\s/g, "-")}`;
             case "person":
-                return `/person/${result.name
-                    .toLowerCase()
+                return `/person/${result?.name
+                    ?.toLowerCase()
                     .replace(/[^\w\s-]/g, "")
                     .replace(/\s/g, "-")}`;
             default:
-                return `/movie/${result.title
-                    .toLowerCase()
+                return `/movie/${result?.title
+                    ?.toLowerCase()
                     .replace(/[^\w\s-]/g, "")
                     .replace(/\s/g, "-")}`;
         }
@@ -304,6 +305,13 @@ const Search = () => {
                                                                     result.release_date ||
                                                                         result.first_air_date
                                                                 )}
+                                                                <span className="text-yellow-600 pl-2">
+                                                                    {" "}
+                                                                    {result.vote_average.toFixed(
+                                                                        1
+                                                                    )}
+                                                                    /10
+                                                                </span>
                                                             </span>
                                                         </div>
                                                     </div>
@@ -339,10 +347,10 @@ const Search = () => {
                                     <div className="w-full flex justify-center">
                                         <ReactPaginate
                                             activeLinkClassName={
-                                                "items-center text-white cursor-pointer flex text-sm h-10 justify-center p-4 text-blue-500"
+                                                "items-center cursor-pointer flex text-sm h-10 justify-center p-2 md:p-4 text-blue-500"
                                             }
                                             breakClassName={
-                                                "items-center text-white cursor-pointer flex text-sm h-10 justify-center p-4"
+                                                "items-center cursor-pointer flex text-sm h-10 justify-center p-2 md:p-4"
                                             }
                                             breakLabel={"..."}
                                             containerClassName={
@@ -353,7 +361,7 @@ const Search = () => {
                                             }
                                             marginPagesDisplayed={2}
                                             nextClassName={
-                                                "items-center text-white cursor-pointer flex text-sm h-10 justify-center p-4"
+                                                "items-center cursor-pointer flex text-sm h-10 justify-center p-2 md:p-4"
                                             }
                                             nextLabel={
                                                 <IoIosArrowForward size={20} />
@@ -361,18 +369,16 @@ const Search = () => {
                                             onPageChange={handlePageClick}
                                             pageCount={pageCount}
                                             pageLinkClassName={
-                                                "items-center text-white cursor-pointer flex text-sm h-10 justify-center hover:text-blue-500 p-3"
+                                                "items-center cursor-pointer flex text-sm h-10 justify-center hover:text-blue-500 p-2 md:p-3"
                                             }
                                             pageRangeDisplayed={4}
                                             previousClassName={
-                                                "items-center text-white cursor-pointer flex text-sm h-10 justify-center p-4"
+                                                "items-center cursor-pointer flex text-sm h-10 justify-center p-2 md:p-4"
                                             }
                                             previousLabel={
                                                 <IoIosArrowBack size={20} />
                                             }
-                                            forcePage={
-                                                page ? parseInt(page) - 1 : 0
-                                            }
+                                            forcePage={parseInt(page) - 1 || 0}
                                             renderOnZeroPageCount={null}
                                         />
                                     </div>

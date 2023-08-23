@@ -48,3 +48,11 @@ export const getList = async (category, type) => {
             return await tmdbApi.getTvList(type, params);
     }
 };
+
+export const getMovieFilters = async (params) => {
+    return await tmdbApi.getMovieFilters(params);
+};
+
+export const getMovieGenres = async () => {
+    return await tmdbApi.getMovieGenres();
+};
