@@ -1,17 +1,15 @@
 import React from "react";
 import Modal from "react-modal";
 import "../assets/styles/swiperModal.css";
-import { register } from "swiper/element/bundle";
 import { RiCloseLine } from "react-icons/ri";
 import { useQuery } from "@tanstack/react-query";
 import { fetchVideoTrailer } from "../api/apiCall/movies";
-
-register();
 
 const ModalVideo = ({ showModal, setShowModal, id }) => {
     const { isError, error, data } = useQuery({
         queryKey: ["ModalVideo", id],
         queryFn: () => fetchVideoTrailer(id),
+        enabled: showModal,
         staleTime: Infinity,
     });
 

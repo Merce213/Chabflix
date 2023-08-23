@@ -43,4 +43,12 @@ export const tmdbApi = {
         const url = "trending/all/day";
         return axiosClient.get(url, { params: {} });
     },
+    getMovieFilters: (params) => {
+        const url = "discover/movie";
+        return axiosClient.get(url, { params });
+    },
+    getMovieGenres: (params) => {
+        const url = "genre/movie/list";
+        return axiosClient.get(url, { params: {} });
+    },
 };
