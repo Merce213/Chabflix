@@ -5,6 +5,7 @@ import Footer from "./components/Footer";
 import Search from "./pages/Search";
 import Movie from "./pages/Movie";
 import ScrollToTop from "./libs/ScrollToTop";
+import Serie from "./pages/Serie";
 
 const App = () => {
     return (
@@ -17,6 +18,7 @@ const App = () => {
                     <Route path="/" element={<Home />} />
                     <Route path="/search/:category?" element={<Search />} />
                     <Route path="/movie" element={<Movie />} />
+                    <Route path="/tv" element={<Serie />} />
                 </Routes>
             </main>
 

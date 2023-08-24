@@ -47,8 +47,16 @@ export const tmdbApi = {
         const url = "discover/movie";
         return axiosClient.get(url, { params });
     },
-    getMovieGenres: (params) => {
+    getMovieGenres: () => {
         const url = "genre/movie/list";
+        return axiosClient.get(url, { params: {} });
+    },
+    getTvFilters: (params) => {
+        const url = "discover/tv";
+        return axiosClient.get(url, { params });
+    },
+    getTvGenres: () => {
+        const url = "genre/tv/list";
         return axiosClient.get(url, { params: {} });
     },
 };
