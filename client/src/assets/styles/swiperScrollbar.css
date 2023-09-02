@@ -1,0 +1,7 @@
+swiper-container::part(scrollbar) {
+    background-color: white;
+    height: 7px;
+    margin-top: 2rem;
+    cursor: pointer;
+    padding: 2px 0;
+}
