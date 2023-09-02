@@ -6,6 +6,7 @@ import Search from "./pages/Search";
 import Movie from "./pages/Movie";
 import ScrollToTop from "./libs/ScrollToTop";
 import Serie from "./pages/Serie";
+import Detail from "./pages/Detail";
 
 const App = () => {
     return (
@@ -19,6 +20,7 @@ const App = () => {
                     <Route path="/search/:category?" element={<Search />} />
                     <Route path="/movie" element={<Movie />} />
                     <Route path="/tv" element={<Serie />} />
+                    <Route path="/:category/:name" element={<Detail />} />
                 </Routes>
             </main>
 

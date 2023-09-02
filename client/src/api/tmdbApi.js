@@ -39,6 +39,18 @@ export const tmdbApi = {
         const url = "search/" + category[cate];
         return axiosClient.get(url, { params });
     },
+    getDetail: (cate, id) => {
+        const url = category[cate] + "/" + id;
+        return axiosClient.get(url, { params: {} });
+    },
+    getCredit: (cate, id) => {
+        const url = category[cate] + "/" + id + "/credits";
+        return axiosClient.get(url, { params: {} });
+    },
+    getSimilar: (cate, id, params) => {
+        const url = category[cate] + "/" + id + "/similar";
+        return axiosClient.get(url, { params });
+    },
     getTrending: () => {
         const url = "trending/all/day";
         return axiosClient.get(url, { params: {} });

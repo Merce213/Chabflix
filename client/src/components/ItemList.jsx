@@ -4,16 +4,16 @@ import Loading from "./Loading";
 import { getList } from "../api/apiCall/movies";
 import ItemCard from "./ItemCard";
 
-const ItemList = ({ category, type }) => {
+const ItemList = ({ category, type, id }) => {
     const { isLoading, isError, error, data } = useQuery({
-        queryKey: ["List", category, type],
-        queryFn: () => getList(category, type),
+        queryKey: ["list", category, type, id || ""],
+        queryFn: () => getList(category, type, id),
         staleTime: Infinity,
     });
 
     if (isLoading) return <Loading />;
 
-    if (isError) return <div>Une erreur est survenue {error.message}</div>;
+    if (isError) return <div>Something went wrong.. {error.message}</div>;
 
     // console.table([category, type, data.results]);
 

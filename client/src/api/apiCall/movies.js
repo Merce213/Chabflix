@@ -38,14 +38,18 @@ export const fetchVideoTrailer = async (id) => {
     return response;
 };
 
-export const getList = async (category, type) => {
+export const getList = async (category, type, id = "") => {
     const params = {};
 
-    switch (category) {
-        case "movie":
-            return await tmdbApi.getMovieList(type, params);
-        case "tv":
-            return await tmdbApi.getTvList(type, params);
+    if (type !== "similar") {
+        switch (category) {
+            case "movie":
+                return await tmdbApi.getMovieList(type, params);
+            case "tv":
+                return await tmdbApi.getTvList(type, params);
+        }
+    } else {
+        return await tmdbApi.getSimilar(category, id, params);
     }
 };
 
