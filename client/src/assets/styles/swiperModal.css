@@ -1,0 +1,31 @@
+::part(bullet) {
+    background-color: white;
+    opacity: 0.5;
+}
+
+::part(button-prev),
+::part(button-next) {
+    color: white;
+    background-color: black;
+    padding: 0.4rem;
+}
+
+::part(button-prev) {
+    left: -7px;
+}
+
+::part(button-next) {
+    right: -7px;
+}
+
+::part(pagination) {
+    bottom: 0;
+}
+
+/* breakpoint */
+@media (max-width: 768px) {
+    ::part(button-prev),
+    ::part(button-next) {
+        width: 12px;
+    }
+}
