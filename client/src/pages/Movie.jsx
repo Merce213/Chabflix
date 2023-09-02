@@ -33,7 +33,6 @@ const Movie = () => {
         queryFn: () => getMovieGenres(),
         staleTime: Infinity,
     });
-    console.log(dataGenre);
 
     const { data, isLoading, isError, error } = useQuery({
         queryKey: ["movieFilters", filters],
@@ -45,8 +44,6 @@ const Movie = () => {
 
     if (isError || isErrorGenre)
         return <div>Error: {error?.message || errorGenre?.message}</div>;
-
-    console.log(data);
 
     const pageCount = data.total_pages > 500 ? 500 : data.total_pages;
     const totalMovies = data.total_results > 10000 ? 10000 : data.total_results;
@@ -62,7 +59,6 @@ const Movie = () => {
             page: 1,
         });
     };
-    console.log("filters", filters);
 
     const resetFilters = () => {
         setFilters({
@@ -230,6 +226,7 @@ const Movie = () => {
                                                         <Link
                                                             className="block w-full h-full"
                                                             to={link(result)}
+                                                            state={result.id}
                                                         >
                                                             <img
                                                                 loading="lazy"
@@ -261,6 +258,9 @@ const Movie = () => {
                                                                 to={link(
                                                                     result
                                                                 )}
+                                                                state={
+                                                                    result.id
+                                                                }
                                                                 className="whitespace-nowrap overflow-hidden text-ellipsis font-medium md:text-lg"
                                                             >
                                                                 <h2 className="block whitespace-normal overflow-visible text-clip">

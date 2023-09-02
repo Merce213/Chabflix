@@ -229,6 +229,7 @@ const Serie = () => {
                                                         <Link
                                                             className="block w-full h-full"
                                                             to={link(result)}
+                                                            state={result.id}
                                                         >
                                                             <img
                                                                 loading="lazy"
@@ -260,6 +261,9 @@ const Serie = () => {
                                                                 to={link(
                                                                     result
                                                                 )}
+                                                                state={
+                                                                    result.id
+                                                                }
                                                                 className="whitespace-nowrap overflow-hidden text-ellipsis font-medium md:text-lg"
                                                             >
                                                                 <h2 className="block whitespace-normal overflow-visible text-clip">

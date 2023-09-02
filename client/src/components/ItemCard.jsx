@@ -4,6 +4,7 @@ import { apiConfig } from "../api/apiConfig";
 import { BsFillPlayCircleFill } from "react-icons/bs";
 
 import "../assets/styles/itemCard.scss";
+import blankImg from "../assets/images/blank-img.png";
 
 const ItemCard = ({ item, category }) => {
     const bg = apiConfig.w500Image(item.poster_path || item.backdrop_path);
@@ -27,7 +28,15 @@ const ItemCard = ({ item, category }) => {
         <Link to={link()} state={item.id}>
             <div
                 className="movie-card"
-                style={{ backgroundImage: `url(${bg})` }}
+                style={
+                    item.poster_path || item.backdrop_path
+                        ? {
+                              backgroundImage: `url(${bg})`,
+                          }
+                        : {
+                              backgroundImage: `url(${blankImg})`,
+                          }
+                }
             >
                 <button className="text-blue-600">
                     <BsFillPlayCircleFill size={"4rem"} />

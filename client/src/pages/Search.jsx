@@ -258,6 +258,7 @@ const Search = () => {
                                                         <Link
                                                             className="block w-full h-full"
                                                             to={link(result)}
+                                                            state={result.id}
                                                         >
                                                             <img
                                                                 loading="lazy"
@@ -294,6 +295,9 @@ const Search = () => {
                                                                     result
                                                                 )}
                                                                 className="whitespace-nowrap overflow-hidden text-ellipsis font-medium md:text-lg"
+                                                                state={
+                                                                    result.id
+                                                                }
                                                             >
                                                                 <h2 className="block whitespace-normal overflow-visible text-clip">
                                                                     {result.title ||
@@ -307,10 +311,12 @@ const Search = () => {
                                                                 )}
                                                                 <span className="text-yellow-600 pl-2">
                                                                     {" "}
-                                                                    {result.vote_average.toFixed(
-                                                                        1
-                                                                    )}
-                                                                    /10
+                                                                    {result?.vote_average
+                                                                        ? result?.vote_average?.toFixed(
+                                                                              1
+                                                                          ) +
+                                                                          "/10"
+                                                                        : ""}
                                                                 </span>
                                                             </span>
                                                         </div>
@@ -330,11 +336,28 @@ const Search = () => {
                                                                             item
                                                                         )}
                                                                         className="text-sm"
+                                                                        state={
+                                                                            item.id
+                                                                        }
                                                                     >
-                                                                        {item.title +
-                                                                            ", " ||
-                                                                            item.name +
-                                                                                ", "}
+                                                                        {item.title ||
+                                                                            item.name}
+
+                                                                        {result
+                                                                            ?.known_for
+                                                                            ?.length >
+                                                                            1 &&
+                                                                            result?.known_for?.indexOf(
+                                                                                item
+                                                                            ) !==
+                                                                                result
+                                                                                    ?.known_for
+                                                                                    ?.length -
+                                                                                    1 && (
+                                                                                <span className="text-gray-600">
+                                                                                    ,{" "}
+                                                                                </span>
+                                                                            )}
                                                                     </Link>
                                                                 )
                                                             )}

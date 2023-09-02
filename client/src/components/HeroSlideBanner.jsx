@@ -89,6 +89,7 @@ const HeroSlideItem = forwardRef(({ movie }, ref) => {
                                     .toLowerCase()
                                     .replace(/[^\w\s-]/g, "")
                                     .replace(/\s/g, "-")}`}
+                                state={movie.id}
                             >
                                 Watch now
                             </Link>
