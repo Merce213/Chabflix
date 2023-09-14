@@ -46,7 +46,7 @@ const ItemCard = ({ item, category }) => {
                 {item.title || item.name}
                 <span className="text-sm text-yellow-400">
                     {" "}
-                    {item.vote_average}/10
+                    {item.vote_average.toFixed(1)}/10
                 </span>
             </h3>
         </Link>

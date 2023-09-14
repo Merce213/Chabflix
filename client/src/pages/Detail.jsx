@@ -23,6 +23,24 @@ const Detail = () => {
 
     const bg = apiConfig.originalImage(data.backdrop_path || data.poster_path);
 
+    const formattedDate = (dateNumeric) => {
+        if (!dateNumeric) {
+            return "";
+        }
+
+        const date = new Date(dateNumeric);
+        const options = { year: "numeric", month: "long", day: "numeric" };
+        const formatDate = date.toLocaleDateString("en-EN", options);
+
+        return formatDate;
+    };
+
+    const timeConvert = (num) => {
+        const hours = Math.floor(num / 60);
+        const minutes = num % 60;
+        return `${hours}h ${minutes}min`;
+    };
+
     return data ? (
         <>
             <div
@@ -31,6 +49,7 @@ const Detail = () => {
                     backgroundImage: `url(${bg})`,
                 }}
             ></div>
+
             <section className="mb-8 flex justify-start items-start container mx-auto -mt-[200px] relative py-0 px-8">
                 <div className="grow hidden md:block">
                     <div
@@ -43,10 +62,42 @@ const Detail = () => {
                         alt={data.title || data.name}
                     ></div>
                 </div>
+
                 <div className="w-full pl-0 md:w-[70%] md:px-8 relative [&>*]:mb-12">
-                    <h1 className="title text-2xl md:text-6xl">
+                    <h1 className="text-2xl md:text-6xl font-bold">
                         {data.title || data.name}
+                        <span className="text-xl md:text-4xl ml-2">
+                            (
+                            {(data.release_date || data.first_air_date).slice(
+                                0,
+                                4
+                            )}
+                            )
+                        </span>
                     </h1>
+                    <div className="flex items-center justify-between mb-2">
+                        <div className="flex items-center">
+                            <span className="text-sm font-semibold">
+                                {formattedDate(
+                                    data.release_date || data.first_air_date
+                                )}
+                            </span>
+                            <span className="text-sm font-semibold ml-2">
+                                ⋅
+                            </span>
+                            <span className="text-sm text-yellow-400 font-semibold ml-2">
+                                {data.vote_average.toFixed(1)}/10
+                            </span>
+                            <span className="text-sm font-semibold ml-2">
+                                ⋅
+                            </span>
+                            <span className="text-sm font-semibold ml-2">
+                                {timeConvert(
+                                    data.runtime || data.episode_run_time
+                                )}
+                            </span>
+                        </div>
+                    </div>
                     <div className="md:[&>*~*]:ml-2 grid grid-cols-2 gap-2 md:gap-0 md:flex md:flex-wrap">
                         {data.genres.map((genre) => (
                             <span
@@ -66,6 +117,7 @@ const Detail = () => {
                     </div>
                 </div>
             </section>
+
             <div className="container mx-auto px-8 mb-8">
                 <div className="mb-3">
                     <VideoList id={data.id} />

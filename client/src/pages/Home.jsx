@@ -8,7 +8,7 @@ const Home = () => {
     return (
         <>
             <HeroSlideBanner />
-            <section className="flex flex-col container mx-auto gap-2">
+            <section className="flex flex-col container mx-auto gap-2 p-2">
                 <div className="mb-5">
                     <div className="flex items-center justify-between mb-2">
                         <h2 className="text-2xl font-bold">Trending Movies</h2>

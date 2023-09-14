@@ -28,7 +28,7 @@ const VideoList = ({ id }) => {
 const Video = ({ item }) => {
     const iframeRef = useRef();
 
-    console.log(iframeRef);
+    // console.log(iframeRef);
 
     useEffect(() => {
         const height = (iframeRef.current.offsetWidth * 9) / 16 + "px";

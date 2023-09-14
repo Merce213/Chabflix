@@ -40,6 +40,16 @@ const Navbar = () => {
         }
     };
 
+    const openMenuMobile = () => {
+        setMobileMenuOpen(true);
+        document.body.style.overflow = "hidden";
+    };
+
+    const closeMenuMobile = () => {
+        setMobileMenuOpen(false);
+        document.body.style.overflow = "";
+    };
+
     const userDropdownRef = useRef(null);
 
     const { user } = useUserValue();
@@ -260,26 +270,30 @@ const Navbar = () => {
                     />
                 </button>
 
-                <button className="p-2 md:hidden">
+                <button
+                    className={`p-2 md:hidden ${
+                        searchBoxOpen ? "z-0" : "z-20"
+                    }`}
+                >
                     {mobileMenuOpen ? (
                         <RiCloseLine
                             size={"24px"}
                             alt="close menu"
                             className="close"
-                            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                            onClick={closeMenuMobile}
                         />
                     ) : (
                         <HiOutlineMenu
                             size={"24px"}
                             alt="open menu"
                             className="menu"
-                            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                            onClick={openMenuMobile}
                         />
                     )}
                 </button>
 
                 <div
-                    className={`absolute top-0 h-screen w-1/3 bg-gray-600 z-10 p-6 md:hidden transition-all duration-500 ${
+                    className={`absolute top-0 h-screen w-full bg-gray-600/90 p-6 md:hidden transition-all duration-500 ${
                         mobileMenuOpen ? "left-0" : "-left-full"
                     }`}
                     id="mobile-menu"
@@ -289,7 +303,7 @@ const Navbar = () => {
                         alt="logo"
                         className="w-32 object-contain mx-auto mb-8"
                     />
-                    <NavLinks handleClick={() => setMobileMenuOpen(false)} />
+                    <NavLinks handleClick={closeMenuMobile} />
                 </div>
             </nav>
             {searchBoxOpen && (
