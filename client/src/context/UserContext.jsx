@@ -11,14 +11,17 @@ export const UserProvider = ({ children }) => {
     // console.log(isSessionId);
 
     const fetchUserInfos = async () => {
-        const response = await fetch("http://localhost:8000/api/auth/me", {
-            method: "GET",
-            headers: {
-                Accept: "application/json",
-                "Content-Type": "application/json",
-            },
-            credentials: "include",
-        });
+        const response = await fetch(
+            "https://chabflix.onrender.com/api/auth/me",
+            {
+                method: "GET",
+                headers: {
+                    Accept: "application/json",
+                    "Content-Type": "application/json",
+                },
+                credentials: "include",
+            }
+        );
         const data = await response.json();
         setUser(data);
         return data;
