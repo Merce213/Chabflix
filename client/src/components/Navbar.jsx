@@ -56,7 +56,7 @@ const Navbar = () => {
 
     const login = async () => {
         const response = await fetch(
-            "http://localhost:8000/api/auth/request-token",
+            "https://chabflix.onrender.com/api/auth/request-token",
             {
                 method: "GET",
                 headers: {
@@ -71,7 +71,7 @@ const Navbar = () => {
     };
 
     const logout = async () => {
-        await fetch("http://localhost:8000/api/auth/logout", {
+        await fetch("https://chabflix.onrender.com/api/auth/logout", {
             method: "DELETE",
             headers: {
                 Accept: "application/json",
