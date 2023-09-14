@@ -12,6 +12,7 @@ const app = express();
 // Middlewares
 app.use(
     cors({
+        origin: "https://chabflix.vercel.app/",
         credentials: true,
     })
 );
