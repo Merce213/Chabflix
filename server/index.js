@@ -19,7 +19,12 @@ app.use(
     })
 );
 app.use(bodyParser.json());
-app.use(cookieParser("7vUOCC0Goe8n2pHDfwfiBLw1FG5QLRAr"));
+app.use(
+    cookieParser("7vUOCC0Goe8n2pHDfwfiBLw1FG5QLRAr", {
+        sameSite: "none",
+        secure: true,
+    })
+);
 
 // API Routes
 app.use("/api/auth", authRoutes);
