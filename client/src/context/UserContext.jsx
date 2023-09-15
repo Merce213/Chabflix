@@ -8,7 +8,7 @@ export const UserProvider = ({ children }) => {
     const [user, setUser] = useState(null);
 
     const isSessionId = document.cookie.includes("success");
-    // console.log(isSessionId);
+    console.log("isSessionId", isSessionId);
 
     const fetchUserInfos = async () => {
         const response = await fetch(
@@ -26,6 +26,8 @@ export const UserProvider = ({ children }) => {
         setUser(data);
         return data;
     };
+
+    console.log("user", user);
 
     const { isInitialLoading, isError, error } = useQuery({
         queryKey: ["UserInfos"],
