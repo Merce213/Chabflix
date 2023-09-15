@@ -48,9 +48,15 @@ export const tmdbCallback = async (req, res) => {
 
         res.cookie("session_id", sessionId, {
             httpOnly: true,
+            secure: true,
             signed: true,
+            sameSite: "none",
         });
-        res.cookie("success", success);
+        res.cookie("success", success, {
+            httpOnly: false,
+            secure: true,
+            sameSite: "none",
+        });
 
         res.redirect(REDIRECT_URI_CLIENT);
     } else {
