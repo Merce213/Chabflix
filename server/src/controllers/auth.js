@@ -25,6 +25,7 @@ export const requestToken = async (req, res) => {
 };
 
 export const tmdbCallback = async (req, res) => {
+    console.log("callback", req.query);
     const { request_token } = req.query;
     const approved = req.query.approved === "true";
 
@@ -58,6 +59,8 @@ export const tmdbCallback = async (req, res) => {
 };
 
 export const userInfos = async (req, res) => {
+    console.log("signedCookies", req.signedCookies);
+    console.log("cookies", req.cookies);
     const sessionId = req.signedCookies.session_id;
 
     if (!sessionId) {
