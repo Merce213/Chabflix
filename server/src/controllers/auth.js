@@ -47,6 +47,7 @@ export const tmdbCallback = async (req, res) => {
 
         res.cookie("session_id", sessionId, {
             httpOnly: true,
+            signed: true,
         });
         res.cookie("success", success);
 
@@ -57,7 +58,7 @@ export const tmdbCallback = async (req, res) => {
 };
 
 export const userInfos = async (req, res) => {
-    const sessionId = req.cookies.session_id;
+    const sessionId = req.signedCookies.session_id;
 
     if (!sessionId) {
         res.end();
@@ -80,7 +81,7 @@ export const userInfos = async (req, res) => {
 };
 
 export const logout = async (req, res) => {
-    const sessionId = req.cookies.session_id;
+    const sessionId = req.signedCookies.session_id;
 
     if (!sessionId) {
         res.end();
