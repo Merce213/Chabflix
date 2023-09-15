@@ -12,11 +12,14 @@ const app = express();
 // Middlewares
 app.use(
     cors({
+        origin: "https://chabflix.vercel.app",
+        methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
         credentials: true,
+        optionsSuccessStatus: 204,
     })
 );
 app.use(bodyParser.json());
-app.use(cookieParser());
+app.use(cookieParser("7vUOCC0Goe8n2pHDfwfiBLw1FG5QLRAr"));
 
 // API Routes
 app.use("/api/auth", authRoutes);
