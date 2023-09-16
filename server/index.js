@@ -19,6 +19,7 @@ app.use(
         methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
         credentials: true,
         optionsSuccessStatus: 204,
+        exposedHeaders: ["set-cookie"],
     })
 );
 app.use(bodyParser.json());
